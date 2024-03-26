@@ -1,28 +1,19 @@
-import { WagmiProvider, createConfig, http } from "wagmi";
-import { mainnet } from "wagmi/chains";
+import { WagmiProvider, createConfig } from "wagmi";
+import { sepolia, arbitrumSepolia, baseSepolia, optimismSepolia } from "wagmi/chains";
+import { injected, safe, walletConnect } from "wagmi/connectors";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ConnectKitProvider, getDefaultConfig } from "connectkit";
 import { WALLETCONNECT_PROJECT_ID } from "../constants";
 
 const config = createConfig(
   getDefaultConfig({
-    // Your dApps chains
-    chains: [mainnet],
-    transports: {
-      // RPC URL for each chain
-      [mainnet.id]: http(`https://eth-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_ID}`),
-    },
-
-    // Required API Keys
+    chains: [sepolia, arbitrumSepolia, baseSepolia, optimismSepolia],
+    connectors: [injected(), walletConnect({ projectId: WALLETCONNECT_PROJECT_ID }), safe()],
     walletConnectProjectId: WALLETCONNECT_PROJECT_ID,
-
-    // Required App Info
-    appName: "Your App Name",
-
-    // Optional App Info
-    appDescription: "Your App Description",
-    appUrl: "https://family.co", // your app's url
-    appIcon: "https://family.co/logo.png", // your app's icon, no bigger than 1024x1024px (max. 1MB)
+    appName: "Switch Chains Prototype",
+    appDescription: "A simple app that demonstrates how to implement a UI that allows users to switch chains",
+    appUrl: "https://family.co",
+    appIcon: "https://family.co/logo.png",
   })
 );
 

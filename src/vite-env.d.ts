@@ -1,10 +1,9 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  readonly WALLETCONNECT_PROJECT_ID: string;
-  readonly ALCHEMY_API_KEY: string;
-  readonly INFURA_API_KEY: string;
-  // more env variables...
+  readonly VITE_WALLETCONNECT_PROJECT_ID: string;
+  readonly VITE_ALCHEMY_API_KEY: string;
+  readonly VITE_INFURA_API_KEY: string;
 }
 
 interface ImportMeta {

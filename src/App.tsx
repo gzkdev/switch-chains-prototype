@@ -1,3 +1,10 @@
+import { ConnectKitButton } from "connectkit";
+import { Web3Provider } from "./providers/web3provider";
+
 export default function App() {
-  return <h1 className="text-3xl font-bold">Hello world!</h1>;
+  return (
+    <Web3Provider>
+      <ConnectKitButton />
+    </Web3Provider>
+  );
 }
