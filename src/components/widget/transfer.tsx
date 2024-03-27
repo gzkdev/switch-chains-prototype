@@ -10,7 +10,7 @@ import { getTokenImage } from "../../utils/getTokenImage";
 import { getNetworkImage } from "../../utils/getNetworkImage";
 
 export function Swap() {
-  const { networkDispatch, networkStore, updateWidgetView } =
+  const { networkDispatch, networkStore, widgetViewDispatch } =
     useBridgeProvider();
   const { source, target } = networkStore;
 
@@ -38,7 +38,9 @@ export function Swap() {
           <div className="flex items-center justify-between text-xs font-medium">
             <span>Pay</span>
             <button
-              onClick={() => updateWidgetView("NETWORKS")}
+              onClick={() =>
+                widgetViewDispatch({ type: "SELECT", payload: "SOURCE" })
+              }
               className="inline-flex items-center gap-2 p-1 text-base transition rounded-full bg-slate-200 hover:bg-slate-300"
             >
               <span className="relative w-7">
@@ -85,7 +87,9 @@ export function Swap() {
           <div className="flex items-center justify-between text-xs font-medium">
             <span>Receive</span>
             <button
-              onClick={() => updateWidgetView("NETWORKS")}
+              onClick={() =>
+                widgetViewDispatch({ type: "SELECT", payload: "TARGET" })
+              }
               className="inline-flex items-center gap-2 p-1 text-base transition rounded-full bg-slate-200 hover:bg-slate-300"
             >
               <span className="relative w-7">

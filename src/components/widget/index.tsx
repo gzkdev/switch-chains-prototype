@@ -5,8 +5,8 @@ import { Swap } from "./transfer";
 export function Widget() {
   const { widgetView } = useBridgeProvider();
 
-  switch (widgetView) {
-    case "NETWORKS": {
+  switch (widgetView.view) {
+    case "SELECT": {
       return <Networks />;
     }
     default: {

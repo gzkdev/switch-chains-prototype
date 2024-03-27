@@ -1,13 +1,28 @@
-import { useCallback, useState } from "react";
-import { WidgetView } from "../types";
+import { useReducer } from "react";
+import { WidgetView, WidgetViewAction } from "../types";
+
+const initialState: WidgetView = {
+  view: "TRANSFER",
+  select: "SOURCE",
+};
+
+function widgetViewReducer(state: WidgetView, action: WidgetViewAction) {
+  switch (action.type) {
+    case "SELECT": {
+      const { type, payload } = action;
+      return { view: type, select: payload };
+    }
+    default: {
+      return { ...state, view: action.type };
+    }
+  }
+}
 
 export function useWidgetView() {
-  const [widgetView, setWidgetView] = useState<WidgetView>("TRANSFER");
-
-  const updateWidgetView = useCallback(
-    (view: WidgetView) => setWidgetView(view),
-    [widgetView]
+  const [widgetView, widgetViewDispatch] = useReducer(
+    widgetViewReducer,
+    initialState
   );
 
-  return { widgetView, updateWidgetView };
+  return { widgetView, widgetViewDispatch };
 }

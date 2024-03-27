@@ -1,11 +1,23 @@
 import { ArrowLeft } from "@phosphor-icons/react";
 import { useBridgeProvider } from "../../hooks/useBridgeProvider";
-import { SupportedNetworks } from "../../constants";
+import { SupportedNetworks, SupportedTokensList } from "../../constants";
 import { getSupportedNetworkName } from "../../utils/getSupportedNetworkName";
 import { getNetworkImage } from "../../utils/getNetworkImage";
+import { getActiveChainId } from "../../utils/getActiveChainId";
+import {
+  getSelectedToken,
+  getSupportedTokensList,
+} from "../../utils/getSelectedToken";
+import { getTokenImage } from "../../utils/getTokenImage";
 
 export function Networks() {
-  const { updateWidgetView } = useBridgeProvider();
+  const { widgetViewDispatch, widgetView, networkDispatch, networkStore } =
+    useBridgeProvider();
+
+  const type = widgetView.select === "SOURCE" ? "SET_SOURCE" : "SET_TARGET";
+  const activeChainId = getActiveChainId(widgetView.select, networkStore);
+  const selectedToken = getSelectedToken(widgetView.select, networkStore);
+  const tokens = getSupportedTokensList(widgetView.select, networkStore);
 
   return (
     <div className="widget-container min-h-96">
@@ -16,7 +28,7 @@ export function Networks() {
         <div className="flex items-center gap-2 text-2xl">
           <button
             className="widget-nav-btn"
-            onClick={() => updateWidgetView("TRANSFER")}
+            onClick={() => widgetViewDispatch({ type: "TRANSFER" })}
           >
             <ArrowLeft weight="bold" size={18} />
           </button>
@@ -28,8 +40,21 @@ export function Networks() {
           {SupportedNetworks.map((chainId) => (
             <button
               key={chainId}
+              onClick={() => {
+                networkDispatch({
+                  type,
+                  payload: {
+                    chainId,
+                    selectedToken: SupportedTokensList[chainId][0],
+                  },
+                });
+                widgetViewDispatch({ type: "TRANSFER" });
+              }}
               title={getSupportedNetworkName(chainId)}
               className="inline-flex items-center justify-center p-2 sm:p-4 aspect-square bg-slate-300 rounded-xl"
+              style={{
+                border: activeChainId === chainId ? "1px solid black" : "",
+              }}
             >
               {getNetworkImage(chainId)}
             </button>
@@ -50,14 +75,25 @@ export function Networks() {
         </div>
 
         <div className="flex flex-col py-4">
-          <div className="flex items-center gap-2 p-2 transition border hover:border-black rounded-xl">
-            <div className="w-10 rounded-full aspect-square bg-slate-300"></div>
-            <div className="flex flex-col flex-grow leading-none">
-              <div>USD.h</div>
-              <div className="text-sm">Hyper USD</div>
+          {tokens.map((token) => (
+            <div
+              key={token.symbol}
+              className="flex items-center gap-2 p-2 transition border hover:border-black rounded-xl"
+              style={{
+                border:
+                  token.address === selectedToken ? "1px solid black" : "",
+              }}
+            >
+              <div className="w-10 rounded-full aspect-square bg-slate-300">
+                {getTokenImage(token)}
+              </div>
+              <div className="flex flex-col flex-grow leading-none">
+                <div>{token.symbol}</div>
+                <div className="text-sm">{token.name}</div>
+              </div>
+              <div>100 {token.symbol}</div>
             </div>
-            <div>100 USD.h</div>
-          </div>
+          ))}
         </div>
       </div>
     </div>

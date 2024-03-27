@@ -33,9 +33,18 @@ export type Action =
   | { type: "SET_SOURCE"; payload: Network }
   | { type: "SET_TARGET"; payload: Network };
 
-export type WidgetView =
-  | "TRANSFER"
-  | "SETTINGS"
-  | "NETWORKS"
-  | "HISTORY"
-  | "TRANSACTION";
+export type WidgetViewPayload = "SOURCE" | "TARGET";
+
+export type WidgetViewAction =
+  | { type: "TRANSFER" }
+  | { type: "SETTINGS" }
+  | { type: "HISTORY" }
+  | { type: "TRANSACTION" }
+  | { type: "SELECT"; payload: WidgetViewPayload };
+
+export type WidgetViewType = WidgetViewAction["type"];
+
+export type WidgetView = {
+  view: WidgetViewType;
+  select: WidgetViewPayload;
+};
