@@ -1,8 +1,8 @@
 import { Token } from "../types";
-import EtherLogo from "../assets/images/networks/arbitrum.png";
-import UsdtLogo from "../assets/images/networks/base.png";
-import UsdcLogo from "../assets/images/networks/ethereum.png";
-import UsdhLogo from "../assets/images/networks/optimism.png";
+import EtherLogo from "../assets/images/tokens/eth.png";
+import UsdtLogo from "../assets/images/tokens/usdt.png";
+import UsdcLogo from "../assets/images/tokens/usdc.png";
+import UsdhLogo from "../assets/images/tokens/usd-h.png";
 
 export function getTokenImage(token: Token) {
   switch (token.symbol) {

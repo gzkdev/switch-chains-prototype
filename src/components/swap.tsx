@@ -1,7 +1,13 @@
 import { ClockCounterClockwise, GearSix } from "@phosphor-icons/react";
 import { ConnectKitButton } from "connectkit";
+import { useBridgeProvider } from "../hooks/useBridgeProvider";
+import { getTokenImage } from "../utils/getTokenImage";
+import { getNetworkImage } from "../utils/getNetworkImage";
 
 export function Swap() {
+  const { networkDispatch, networkStore } = useBridgeProvider();
+  const { source, target } = networkStore;
+
   return (
     <div className="flex flex-col w-full max-w-md gap-1 p-2 rounded-2xl bg-slate-200">
       <div className="flex items-center justify-between px-2 py-1">
@@ -16,18 +22,22 @@ export function Swap() {
         </div>
       </div>
       <div className="relative grid flex-grow w-full grid-rows-2 gap-1 place-items-center">
-        <div className="flex flex-col w-full h-full gap-2 p-4 duration-200 border border-transparent hover:border-slate-400 bg-slate-50 rounded-2xl">
+        <div className="flex flex-col w-full h-full gap-2 p-3 duration-200 border border-transparent hover:border-slate-400 bg-slate-50 rounded-2xl">
           <div className="flex items-center justify-between text-xs">
             <span>Pay</span>
             <button
               onClick={() => console.log("TOKEN SETTINGS")}
-              className="flex items-center gap-2 px-1 py-1 text-base rounded-full outline outline-slate-200"
+              className="flex items-center gap-2 p-1.5 text-base rounded-full bg-slate-200"
             >
               <span className="relative w-7">
-                <span className="flex w-full h-full rounded-full bg-slate-300 aspect-square"></span>
-                <span className="absolute w-5 rounded-full -right-1 -bottom-1 aspect-square bg-slate-200"></span>
+                <span className="flex w-full h-full rounded-full bg-slate-300 aspect-square">
+                  {getTokenImage(source.selectedToken)}
+                </span>
+                <span className="absolute w-5 rounded-full -right-1 -bottom-1 aspect-square bg-slate-200">
+                  {getNetworkImage(source.chainId)}
+                </span>
               </span>
-              USD.h
+              {source.selectedToken.symbol}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="12"
@@ -58,11 +68,17 @@ export function Swap() {
               >
                 MAX
               </button>
-              <span className="text-slate-500/70"> 500 USD.h Available</span>
+              <span className="text-slate-500/70">
+                {" "}
+                500 {source.selectedToken.symbol} Available
+              </span>
             </div>
           </div>
         </div>
-        <button className="absolute w-10 border bg-slate-50 [box-shadow:0_0_0_4px_#e2e8f0] flex items-center justify-center rounded-full aspect-square">
+        <button
+          onClick={() => networkDispatch({ type: "SWITCH_CHAINS" })}
+          className="absolute w-10 border bg-slate-50 [box-shadow:0_0_0_4px_#e2e8f0] flex items-center justify-center rounded-full aspect-square"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -76,18 +92,22 @@ export function Swap() {
             />
           </svg>
         </button>
-        <div className="w-full h-full p-4 duration-200 border border-transparent hover:border-slate-400 bg-slate-50 rounded-2xl">
+        <div className="w-full h-full p-3 duration-200 border border-transparent hover:border-slate-400 bg-slate-50 rounded-2xl">
           <div className="flex items-center justify-between text-xs">
             <span>Receive</span>
             <button
               onClick={() => console.log("TOKEN SETTINGS")}
-              className="flex items-center gap-2 px-1 py-1 text-base rounded-full outline outline-slate-200"
+              className="flex items-center gap-2 p-1.5 text-base rounded-full bg-slate-200"
             >
               <span className="relative w-7">
-                <span className="flex w-full h-full rounded-full bg-slate-300 aspect-square"></span>
-                <span className="absolute w-5 rounded-full -right-1 -bottom-1 aspect-square bg-slate-200"></span>
+                <span className="flex w-full h-full rounded-full bg-slate-300 aspect-square">
+                  {getTokenImage(target.selectedToken)}
+                </span>
+                <span className="absolute w-4 rounded-full -right-0.5 -bottom-0.5 aspect-square bg-slate-200">
+                  {getNetworkImage(target.chainId)}
+                </span>
               </span>
-              USD.h
+              {target.selectedToken.symbol}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="12"

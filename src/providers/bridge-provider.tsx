@@ -1,22 +1,20 @@
-import { createContext, useContext } from "react";
+import { createContext } from "react";
 import { useAppNetwork } from "../hooks/useAppNetwork";
+import { Action, NetworkStore } from "../types";
 
-const BridgeContext = createContext({});
+type BridgeProviderStore = {
+  networkStore: NetworkStore;
+  networkDispatch: React.Dispatch<Action>;
+};
+
+export const BridgeContext = createContext({} as BridgeProviderStore);
 
 export function BridgeProvider({ children }: { children: React.ReactNode }) {
-  const { network, networkDispatch } = useAppNetwork();
+  const { networkStore, networkDispatch } = useAppNetwork();
 
   return (
-    <BridgeContext.Provider value={{ network, networkDispatch }}>
+    <BridgeContext.Provider value={{ networkStore, networkDispatch }}>
       {children}
     </BridgeContext.Provider>
   );
-}
-
-export function useBridgeProvider() {
-  const ctx = useContext(BridgeContext);
-  if (!ctx) {
-    throw new Error("Can't access provider outside its tree");
-  }
-  return ctx;
 }

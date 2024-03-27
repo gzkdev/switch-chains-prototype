@@ -1,21 +1,6 @@
 import { useReducer } from "react";
-import { ChainId, Token } from "../types";
+import { Action, ChainId, NetworkStore } from "../types";
 import { SupportedTokensList } from "../constants";
-
-type Network = {
-  chainId: ChainId;
-  selectedToken: Token;
-};
-
-type NetworkStore = {
-  source: Network;
-  target: Network;
-};
-
-type Action =
-  | { type: "SWITCH_CHAINS" }
-  | { type: "SET_SOURCE"; payload: Network }
-  | { type: "SET_TARGET"; payload: Network };
 
 const initialState: NetworkStore = {
   source: {
@@ -55,10 +40,10 @@ function networkStoreReducer(state: NetworkStore, action: Action) {
 }
 
 export function useAppNetwork() {
-  const [network, networkDispatch] = useReducer(
+  const [networkStore, networkDispatch] = useReducer(
     networkStoreReducer,
     initialState
   );
 
-  return { network, networkDispatch };
+  return { networkStore, networkDispatch };
 }
