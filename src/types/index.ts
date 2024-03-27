@@ -31,3 +31,10 @@ export type Action =
   | { type: "SWITCH_CHAINS" }
   | { type: "SET_SOURCE"; payload: Network }
   | { type: "SET_TARGET"; payload: Network };
+
+export type WidgetView =
+  | "TRANSFER"
+  | "SETTINGS"
+  | "NETWORKS"
+  | "HISTORY"
+  | "TRANSACTION";

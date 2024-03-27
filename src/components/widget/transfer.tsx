@@ -5,24 +5,31 @@ import {
   GearSix,
 } from "@phosphor-icons/react";
 import { ConnectKitButton } from "connectkit";
-import { useBridgeProvider } from "../hooks/useBridgeProvider";
-import { getTokenImage } from "../utils/getTokenImage";
-import { getNetworkImage } from "../utils/getNetworkImage";
+import { useBridgeProvider } from "../../hooks/useBridgeProvider";
+import { getTokenImage } from "../../utils/getTokenImage";
+import { getNetworkImage } from "../../utils/getNetworkImage";
 
 export function Swap() {
-  const { networkDispatch, networkStore } = useBridgeProvider();
+  const { networkDispatch, networkStore, updateWidgetView } =
+    useBridgeProvider();
   const { source, target } = networkStore;
 
   return (
     <div className="widget-container">
       <div className="widget-header">
-        <span>TRANSFER</span>
-        <div className="flex items-center gap-2 text-2xl">
-          <button onClick={() => console.log("SETTINGS")}>
-            <GearSix />
+        <span className="text-2xl font-medium tracking-tight">Transfer</span>
+        <div className="flex items-center gap-3 text-2xl">
+          <button
+            className="widget-nav-btn"
+            onClick={() => console.log("SETTINGS")}
+          >
+            <GearSix weight="bold" size={20} />
           </button>
-          <button onClick={() => console.log("HISTORY")}>
-            <ClockCounterClockwise />
+          <button
+            className="widget-nav-btn"
+            onClick={() => console.log("HISTORY")}
+          >
+            <ClockCounterClockwise weight="bold" size={20} />
           </button>
         </div>
       </div>
@@ -31,7 +38,7 @@ export function Swap() {
           <div className="flex items-center justify-between text-xs font-medium">
             <span>Pay</span>
             <button
-              onClick={() => console.log("TOKEN SETTINGS")}
+              onClick={() => updateWidgetView("NETWORKS")}
               className="inline-flex items-center gap-2 p-1.5 text-base rounded-full bg-slate-200 hover:bg-slate-300 transition"
             >
               <span className="relative w-7">
@@ -78,7 +85,7 @@ export function Swap() {
           <div className="flex items-center justify-between text-xs font-medium">
             <span>Receive</span>
             <button
-              onClick={() => console.log("TOKEN SETTINGS")}
+              onClick={() => updateWidgetView("NETWORKS")}
               className="inline-flex items-center gap-2 p-1.5 text-base rounded-full bg-slate-200 hover:bg-slate-300 transition"
             >
               <span className="relative w-7">
