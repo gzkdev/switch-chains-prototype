@@ -25,7 +25,7 @@
   }
 
   .widget-header {
-    @apply flex items-center justify-between px-2 py-1 text-slate-700/65;
+    @apply flex items-center justify-between px-2 py-2 text-slate-700/65;
   }
 
   .widget-input-container {

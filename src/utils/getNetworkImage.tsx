@@ -1,6 +1,7 @@
 import { ChainId } from "../types";
 import ArbitrumLogo from "../assets/images/networks/arbitrum.png";
 import BaseLogo from "../assets/images/networks/base.png";
+import BscLogo from "../assets/images/networks/bsc.png";
 import EthereumLogo from "../assets/images/networks/ethereum.png";
 import OptimismLogo from "../assets/images/networks/optimism.png";
 
@@ -9,6 +10,11 @@ export function getNetworkImage(chainId: ChainId) {
     case ChainId.ARBITRUM_SEPOLIA: {
       return (
         <img src={ArbitrumLogo} className="w-full h-full" alt="Arbitrum logo" />
+      );
+    }
+    case ChainId.BINANCE_SMART_CHAIN: {
+      return (
+        <img src={BscLogo} className="w-full h-full" alt="Arbitrum logo" />
       );
     }
     case ChainId.BASE_SEPOLIA: {

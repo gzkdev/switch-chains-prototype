@@ -39,13 +39,13 @@ export function Swap() {
             <span>Pay</span>
             <button
               onClick={() => updateWidgetView("NETWORKS")}
-              className="inline-flex items-center gap-2 p-1.5 text-base rounded-full bg-slate-200 hover:bg-slate-300 transition"
+              className="inline-flex items-center gap-2 p-1 text-base transition rounded-full bg-slate-200 hover:bg-slate-300"
             >
               <span className="relative w-7">
                 <span className="flex w-full h-full rounded-full bg-slate-300 aspect-square">
                   {getTokenImage(source.selectedToken)}
                 </span>
-                <span className="absolute w-4 rounded-full -right-0.5 -bottom-0.5 aspect-square bg-slate-200">
+                <span className="absolute w-4 rounded-full -right-0.5 -bottom-0.5 aspect-square bg-slate-200 [box-shadow:0_0_0_1px_#e2e8f0]">
                   {getNetworkImage(source.chainId)}
                 </span>
               </span>
@@ -86,13 +86,13 @@ export function Swap() {
             <span>Receive</span>
             <button
               onClick={() => updateWidgetView("NETWORKS")}
-              className="inline-flex items-center gap-2 p-1.5 text-base rounded-full bg-slate-200 hover:bg-slate-300 transition"
+              className="inline-flex items-center gap-2 p-1 text-base transition rounded-full bg-slate-200 hover:bg-slate-300"
             >
               <span className="relative w-7">
                 <span className="flex w-full h-full rounded-full bg-slate-300 aspect-square">
                   {getTokenImage(target.selectedToken)}
                 </span>
-                <span className="absolute w-4 rounded-full -right-0.5 -bottom-0.5 aspect-square bg-slate-200">
+                <span className="absolute w-4 rounded-full -right-0.5 -bottom-0.5 aspect-square bg-slate-200 [box-shadow:0_0_0_1px_#e2e8f0]">
                   {getNetworkImage(target.chainId)}
                 </span>
               </span>

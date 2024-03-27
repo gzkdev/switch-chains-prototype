@@ -1,4 +1,5 @@
 import { ChainId, SupportedTokens } from "../types";
+import { getSupportedNetworks } from "../utils/getSupportedNetworks";
 
 export const ALCHEMY_API_KEY = import.meta.env.VITE_ALCHEMY_API_KEY;
 export const INFURA_API_KEY = import.meta.env.VITE_INFURA_API_KEY;
@@ -42,4 +43,15 @@ export const SupportedTokensList: SupportedTokens = {
       chainId: ChainId.SEPOLIA,
     },
   ],
+  [ChainId.BINANCE_SMART_CHAIN]: [
+    {
+      name: "Hyper USD",
+      symbol: "USD.h",
+      address: "0x6df8dE86458D15a3Be3A6B907e6aE6B7af352452",
+      decimals: 18,
+      chainId: ChainId.BINANCE_SMART_CHAIN,
+    },
+  ],
 };
+
+export const SupportedNetworks = getSupportedNetworks();

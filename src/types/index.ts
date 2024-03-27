@@ -3,6 +3,7 @@ export enum ChainId {
   BASE_SEPOLIA = 84532,
   OPTIMISM_SEPOLIA = 11155420,
   ARBITRUM_SEPOLIA = 421614,
+  BINANCE_SMART_CHAIN = 97,
 }
 
 export type SupportedTokens = {
