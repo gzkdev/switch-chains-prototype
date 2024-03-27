@@ -4,8 +4,8 @@ import { SupportedTokensList } from "../constants";
 
 const initialState: NetworkStore = {
   source: {
-    chainId: ChainId.SEPOLIA,
-    selectedToken: SupportedTokensList[ChainId.SEPOLIA][0],
+    chainId: ChainId.OPTIMISM_SEPOLIA,
+    selectedToken: SupportedTokensList[ChainId.OPTIMISM_SEPOLIA][0],
   },
   target: {
     chainId: ChainId.BASE_SEPOLIA,
