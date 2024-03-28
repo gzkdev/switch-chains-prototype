@@ -1,35 +1,18 @@
 import { X } from "@phosphor-icons/react";
-import { useBridgeProvider } from "../../hooks/useBridgeProvider";
 import { SupportedNetworks } from "../../constants";
 import { getSupportedNetworkName } from "../../utils/getSupportedNetworkName";
 import { getNetworkImage } from "../../utils/getNetworkImage";
-import { getActiveChainId } from "../../utils/getActiveChainId";
-import {
-  getSelectedToken,
-  getSupportedTokensList,
-} from "../../utils/getSelectedToken";
 import { getTokenImage } from "../../utils/getTokenImage";
-import { ChainId } from "../../types";
+import { useNetworkSelector } from "../../hooks/useNetworkSelector";
 
 export function Networks() {
-  const { widgetViewDispatch, widgetView, networkStore, setSource, setTarget } =
-    useBridgeProvider();
-
-  const activeChainId = getActiveChainId(widgetView.select, networkStore);
-  const selectedToken = getSelectedToken(widgetView.select, networkStore);
-  const tokens = getSupportedTokensList(widgetView.select, networkStore);
-
-  function handleNetworkChange(chainId: ChainId) {
-    return async () => {
-      if (widgetView.select === "SOURCE") {
-        await setSource(chainId);
-        widgetViewDispatch({ type: "TRANSFER" });
-      } else {
-        setTarget(chainId);
-        widgetViewDispatch({ type: "TRANSFER" });
-      }
-    };
-  }
+  const {
+    activeChainId,
+    handleNetworkChange,
+    selectedToken,
+    tokens,
+    widgetViewDispatch,
+  } = useNetworkSelector();
 
   return (
     <div className="widget-container min-h-96">
