@@ -18,13 +18,13 @@ export function Navbar() {
             {({ show }) => (
               <button
                 onClick={show}
-                className="flex items-center gap-1 px-3 py-3 text-sm font-medium sm:text-base rounded-xl bg-slate-300"
+                className="flex items-center gap-1 p-2 text-sm font-medium rounded-xl sm:text-base bg-slate-300"
               >
                 <span className="flex items-center justify-center w-5 p-0.5 sm:p-1 rounded-full sm:w-7 aspect-square bg-slate-200">
                   {getNetworkImage(chainId as ChainId)}
                 </span>
                 {truncateAddress(address)}
-                <CaretDown weight="bold" className="ml-1" />
+                <CaretDown weight="bold" />
               </button>
             )}
           </ConnectKitButton.Custom>

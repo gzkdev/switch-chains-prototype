@@ -35,7 +35,7 @@ export function TransferWidget() {
       </div>
       <div className="relative grid flex-grow w-full grid-rows-2 gap-1 place-items-center">
         <div className="widget-input-container">
-          <div className="flex items-center justify-between text-xs font-medium">
+          <div className="flex items-center justify-between text-sm">
             <span>Pay</span>
             <button
               onClick={() =>
@@ -84,7 +84,7 @@ export function TransferWidget() {
           <ArrowsDownUp weight="bold" />
         </button>
         <div className="widget-input-container">
-          <div className="flex items-center justify-between text-xs font-medium">
+          <div className="flex items-center justify-between text-sm">
             <span>Receive</span>
             <button
               onClick={() =>
@@ -113,6 +113,22 @@ export function TransferWidget() {
                 placeholder="0"
               />
             </div>
+          </div>
+        </div>
+      </div>
+      <div className="widget-input-container">
+        <div className="flex items-center justify-between text-sm">
+          <span>Recipient</span>
+        </div>
+        <div className="flex flex-grow">
+          <div className="flex-grow">
+            <input
+              type="text"
+              inputMode="text"
+              className="w-full h-full text-base font-medium"
+              placeholder="Wallet Address or ENS name"
+              spellCheck="false"
+            />
           </div>
         </div>
       </div>

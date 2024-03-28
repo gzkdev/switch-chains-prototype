@@ -33,6 +33,6 @@
   }
 
   .widget-nav-btn {
-    @apply inline-flex items-center justify-center w-6 rounded-full sm:w-8 outline outline-slate-700/20 aspect-square;
+    @apply inline-flex items-center justify-center w-6 rounded-xl sm:w-8 outline outline-slate-700/20 aspect-square;
   }
 }
