@@ -10,7 +10,7 @@ import { getTokenImage } from "../../utils/getTokenImage";
 import { getNetworkImage } from "../../utils/getNetworkImage";
 
 export function Swap() {
-  const { networkDispatch, networkStore, widgetViewDispatch } =
+  const { switchChains, networkStore, widgetViewDispatch } =
     useBridgeProvider();
   const { source, target } = networkStore;
 
@@ -78,7 +78,7 @@ export function Swap() {
           </div>
         </div>
         <button
-          onClick={() => networkDispatch({ type: "SWITCH_CHAINS" })}
+          onClick={() => switchChains(networkStore)}
           className="absolute w-8 sm:w-10 bg-slate-50 [box-shadow:0_0_0_4px_#e2e8f0] flex items-center justify-center rounded-full aspect-square"
         >
           <ArrowsDownUp weight="bold" />
@@ -117,12 +117,12 @@ export function Swap() {
         </div>
       </div>
       <ConnectKitButton.Custom>
-        {({ show }) => (
+        {({ show, isConnected }) => (
           <button
             onClick={show}
-            className="p-4 text-xl font-medium bg-slate-500 text-slate-50 rounded-2xl"
+            className="p-3 bg-slate-500 text-slate-50 rounded-2xl"
           >
-            Connect wallet
+            {isConnected ? "Bridge" : "Connect wallet"}
           </button>
         )}
       </ConnectKitButton.Custom>

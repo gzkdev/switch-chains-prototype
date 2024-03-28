@@ -29,7 +29,7 @@ export type NetworkStore = {
 };
 
 export type Action =
-  | { type: "SWITCH_CHAINS" }
+  | { type: "SWITCH_CHAINS"; payload: { source: Network; target: Network } }
   | { type: "SET_SOURCE"; payload: Network }
   | { type: "SET_TARGET"; payload: Network };
 

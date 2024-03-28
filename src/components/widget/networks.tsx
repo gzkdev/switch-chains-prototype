@@ -1,6 +1,6 @@
 import { ArrowLeft } from "@phosphor-icons/react";
 import { useBridgeProvider } from "../../hooks/useBridgeProvider";
-import { SupportedNetworks, SupportedTokensList } from "../../constants";
+import { SupportedNetworks } from "../../constants";
 import { getSupportedNetworkName } from "../../utils/getSupportedNetworkName";
 import { getNetworkImage } from "../../utils/getNetworkImage";
 import { getActiveChainId } from "../../utils/getActiveChainId";
@@ -9,15 +9,31 @@ import {
   getSupportedTokensList,
 } from "../../utils/getSelectedToken";
 import { getTokenImage } from "../../utils/getTokenImage";
+import { ChainId } from "../../types";
 
 export function Networks() {
-  const { widgetViewDispatch, widgetView, networkDispatch, networkStore } =
+  const { widgetViewDispatch, widgetView, networkStore, setSource, setTarget } =
     useBridgeProvider();
 
-  const type = widgetView.select === "SOURCE" ? "SET_SOURCE" : "SET_TARGET";
   const activeChainId = getActiveChainId(widgetView.select, networkStore);
   const selectedToken = getSelectedToken(widgetView.select, networkStore);
   const tokens = getSupportedTokensList(widgetView.select, networkStore);
+
+  function handleNetworkChange(chainId: ChainId) {
+    return async () => {
+      try {
+        if (widgetView.select === "SOURCE") {
+          return await setSource(chainId);
+        }
+        return setTarget(chainId);
+      } catch (error) {
+        console.log(error);
+        widgetViewDispatch({ type: "SELECT", payload: "SOURCE" });
+      } finally {
+        widgetViewDispatch({ type: "TRANSFER" });
+      }
+    };
+  }
 
   return (
     <div className="widget-container min-h-96">
@@ -40,16 +56,7 @@ export function Networks() {
           {SupportedNetworks.map((chainId) => (
             <button
               key={chainId}
-              onClick={() => {
-                networkDispatch({
-                  type,
-                  payload: {
-                    chainId,
-                    selectedToken: SupportedTokensList[chainId][0],
-                  },
-                });
-                widgetViewDispatch({ type: "TRANSFER" });
-              }}
+              onClick={handleNetworkChange(chainId)}
               title={getSupportedNetworkName(chainId)}
               className="inline-flex items-center justify-center p-2 sm:p-4 aspect-square bg-slate-300 rounded-xl"
               style={{

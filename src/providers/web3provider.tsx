@@ -4,6 +4,7 @@ import {
   arbitrumSepolia,
   baseSepolia,
   optimismSepolia,
+  bscTestnet,
 } from "wagmi/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ConnectKitProvider, getDefaultConfig } from "connectkit";
@@ -11,7 +12,13 @@ import { WALLETCONNECT_PROJECT_ID } from "../constants";
 
 const config = createConfig(
   getDefaultConfig({
-    chains: [sepolia, arbitrumSepolia, baseSepolia, optimismSepolia],
+    chains: [
+      sepolia,
+      arbitrumSepolia,
+      baseSepolia,
+      optimismSepolia,
+      bscTestnet,
+    ],
     walletConnectProjectId: WALLETCONNECT_PROJECT_ID,
     appName: "Switch Chains Prototype",
     appDescription:

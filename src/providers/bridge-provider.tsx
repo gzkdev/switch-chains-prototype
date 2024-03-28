@@ -1,24 +1,39 @@
 import { createContext } from "react";
-import { useAppNetwork } from "../hooks/useAppNetwork";
-import { Action, NetworkStore, WidgetView, WidgetViewAction } from "../types";
+import { useNetwork } from "../hooks/useNetwork";
+import {
+  ChainId,
+  NetworkStore,
+  Token,
+  WidgetView,
+  WidgetViewAction,
+} from "../types";
 import { useWidgetView } from "../hooks/useWidgetView";
 
 type BridgeProviderStore = {
   networkStore: NetworkStore;
   widgetView: WidgetView;
-  networkDispatch: React.Dispatch<Action>;
   widgetViewDispatch: React.Dispatch<WidgetViewAction>;
+  switchChains(store: NetworkStore): Promise<void>;
+  setSource(chainId: ChainId, token?: Token): Promise<void>;
+  setTarget(chainId: ChainId, token?: Token): void;
 };
 
 export const BridgeContext = createContext({} as BridgeProviderStore);
 
 export function BridgeProvider({ children }: { children: React.ReactNode }) {
-  const { networkStore, networkDispatch } = useAppNetwork();
+  const { networkStore, setSource, switchChains, setTarget } = useNetwork();
   const { widgetView, widgetViewDispatch } = useWidgetView();
 
   return (
     <BridgeContext.Provider
-      value={{ networkStore, widgetView, networkDispatch, widgetViewDispatch }}
+      value={{
+        networkStore,
+        widgetView,
+        widgetViewDispatch,
+        setSource,
+        switchChains,
+        setTarget,
+      }}
     >
       {children}
     </BridgeContext.Provider>
