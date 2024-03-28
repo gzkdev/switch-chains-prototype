@@ -61,11 +61,11 @@ export function useNetwork() {
       }
       if (isConnected) {
         await switchChainAsync({ chainId });
-        networkDispatch({
-          type: "SET_SOURCE",
-          payload: { chainId, selectedToken },
-        });
       }
+      networkDispatch({
+        type: "SET_SOURCE",
+        payload: { chainId, selectedToken },
+      });
     } catch {
       throw new Error("Unable to set source chain");
     }
