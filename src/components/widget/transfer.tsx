@@ -120,7 +120,7 @@ export function Swap() {
         {({ show, isConnected }) => (
           <button
             onClick={show}
-            className="p-3 bg-slate-500 text-slate-50 rounded-2xl"
+            className="p-3 bg-slate-800 text-slate-300 rounded-2xl"
           >
             {isConnected ? "Bridge" : "Connect wallet"}
           </button>

@@ -1,4 +1,4 @@
-import { ArrowLeft } from "@phosphor-icons/react";
+import { X } from "@phosphor-icons/react";
 import { useBridgeProvider } from "../../hooks/useBridgeProvider";
 import { SupportedNetworks } from "../../constants";
 import { getSupportedNetworkName } from "../../utils/getSupportedNetworkName";
@@ -42,7 +42,7 @@ export function Networks() {
             className="widget-nav-btn"
             onClick={() => widgetViewDispatch({ type: "TRANSFER" })}
           >
-            <ArrowLeft weight="bold" size={18} />
+            <X weight="bold" size={20} />
           </button>
         </div>
       </div>
@@ -77,7 +77,7 @@ export function Networks() {
           </div>
         </div>
 
-        <div className="flex flex-col py-4">
+        <div className="flex flex-col px-2 py-4">
           {tokens.map((token) => (
             <div
               key={token.symbol}
