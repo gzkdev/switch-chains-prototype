@@ -5,7 +5,7 @@ import { getNetworkImage } from "../../utils/getNetworkImage";
 import { getTokenImage } from "../../utils/getTokenImage";
 import { useNetworkSelector } from "../../hooks/useNetworkSelector";
 
-export function Networks() {
+export function SelectWidget() {
   const {
     activeChainId,
     handleNetworkChange,

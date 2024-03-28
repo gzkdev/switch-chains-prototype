@@ -9,7 +9,7 @@ import { useBridgeProvider } from "../../hooks/useBridgeProvider";
 import { getTokenImage } from "../../utils/getTokenImage";
 import { getNetworkImage } from "../../utils/getNetworkImage";
 
-export function Swap() {
+export function TransferWidget() {
   const { switchChains, networkStore, widgetViewDispatch } =
     useBridgeProvider();
   const { source, target } = networkStore;
