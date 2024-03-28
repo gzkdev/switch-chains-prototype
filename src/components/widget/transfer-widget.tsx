@@ -21,7 +21,7 @@ export function TransferWidget() {
         <div className="flex items-center gap-3 text-2xl">
           <button
             className="widget-nav-btn"
-            onClick={() => console.log("SETTINGS")}
+            onClick={() => widgetViewDispatch({ type: "SETTINGS" })}
           >
             <GearSix weight="bold" size={20} />
           </button>

@@ -9,7 +9,7 @@ export default function App() {
       <BridgeProvider>
         <div className="flex flex-col min-h-screen">
           <Navbar />
-          <div className="self-center px-6 py-36">
+          <div className="flex flex-col items-center justify-center px-6 py-36">
             <Widget />
           </div>
         </div>

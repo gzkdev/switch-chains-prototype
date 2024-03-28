@@ -29,7 +29,7 @@
   }
 
   .widget-input-container {
-    @apply flex flex-col w-full h-full gap-2 p-3 duration-200 border border-transparent hover:border-slate-400 bg-slate-50 rounded-2xl;
+    @apply flex flex-col w-full h-full gap-2 p-3 duration-200 border border-transparent hover:border-slate-400 bg-slate-100 rounded-2xl;
   }
 
   .widget-nav-btn {
