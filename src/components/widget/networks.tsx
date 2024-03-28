@@ -21,15 +21,11 @@ export function Networks() {
 
   function handleNetworkChange(chainId: ChainId) {
     return async () => {
-      try {
-        if (widgetView.select === "SOURCE") {
-          return await setSource(chainId);
-        }
-        return setTarget(chainId);
-      } catch (error) {
-        console.log(error);
-        widgetViewDispatch({ type: "SELECT", payload: "SOURCE" });
-      } finally {
+      if (widgetView.select === "SOURCE") {
+        await setSource(chainId);
+        widgetViewDispatch({ type: "TRANSFER" });
+      } else {
+        setTarget(chainId);
         widgetViewDispatch({ type: "TRANSFER" });
       }
     };
